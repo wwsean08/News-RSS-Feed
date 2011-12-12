@@ -27,8 +27,7 @@ public class RssMotd extends JavaPlugin{
 		server = Bukkit.getServer();
 		pm = server.getPluginManager();
 		initConfig();
-		String prefix = config.getString("prefix");
-		pl = new RssMotdPlayerListener(prefix);
+		pl = new RssMotdPlayerListener(config);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Monitor, this);
 		parseRSS();
 		server.getLogger().info("[NEWS] RSS reader running");
@@ -38,6 +37,7 @@ public class RssMotd extends JavaPlugin{
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if(commandLabel.equalsIgnoreCase("news")){
 			ArrayList<String> list = RssMotdParserRunnable.titles;
+			sender.sendMessage(config.getString("info"));
 			for(String s : list){
 				sender.sendMessage("[NEWS] " + s);
 			}

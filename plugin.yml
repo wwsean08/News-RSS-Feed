@@ -10,3 +10,8 @@ commands:
    news:
       description: This will display the MOTD/news from the RSS feed
       usage: /<command>
+
+permissions:
+    news.ignore:
+        description: doesn't display the news upon joining the server
+        default: false

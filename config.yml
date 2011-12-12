@@ -2,3 +2,5 @@ Feed: http://wwsean08.com/?feed=rss2
 RefreshTime: 30
 Posts: 5
 prefix: '[News]'
+info: '** All news can be found at http://www.wwsean08.com **'
+infoOnJoin: true
