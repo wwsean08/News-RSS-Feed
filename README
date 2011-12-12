@@ -11,6 +11,8 @@ Possible Future Additions
 
 Change Log
 
+	V1.0.2: Added an info and infoOnJoin property to the config.yml which allows you to have a more info type dialogue before the news is displayed (which can be toggled on and off for the onJoin with the infoOnJoin property).  I also adjusted the way that the message is sent to the players slightly
+    V1.0.1: The prefix in the chat can be changed through the config.yml prefix property 
     V1.0.0: Initial release, what you see is what you get. 
 
 Command
