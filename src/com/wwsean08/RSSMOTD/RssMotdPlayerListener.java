@@ -7,8 +7,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 
 public class RssMotdPlayerListener extends PlayerListener{
-	public RssMotdPlayerListener(){
-
+	private String prefix;
+	public RssMotdPlayerListener(String configPrefix){
+		prefix = configPrefix;
 	}
 
 	@Override
@@ -16,7 +17,7 @@ public class RssMotdPlayerListener extends PlayerListener{
 		Player player = event.getPlayer();
 		ArrayList<String> titles = RssMotdParserRunnable.titles;
 		for(String s : titles){
-			player.sendMessage("[News] " + s);
+			player.sendMessage(prefix + " " + s);
 		}
 	}
 }

@@ -26,8 +26,9 @@ public class RssMotd extends JavaPlugin{
 		//hello
 		server = Bukkit.getServer();
 		pm = server.getPluginManager();
-		pl = new RssMotdPlayerListener();
 		initConfig();
+		String prefix = config.getString("prefix");
+		pl = new RssMotdPlayerListener(prefix);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Monitor, this);
 		parseRSS();
 		server.getLogger().info("[NEWS] RSS reader running");
