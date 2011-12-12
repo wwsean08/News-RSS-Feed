@@ -1,0 +1,12 @@
+name: News
+main: com.wwsean08.RSSMOTD.RssMotd
+version: 1.0.0
+website: www.wwsean08.com
+author: wwsean08
+description: A MOTD plugin that grabs titles from an RSS feed
+
+
+commands:
+   news:
+      description: This will display the MOTD/news from the RSS feed
+      usage: /<command>
