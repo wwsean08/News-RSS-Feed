@@ -1,0 +1,18 @@
+This plugin displays the titles from your websites RSS feed to your players when they login as a message of the day.
+Features
+
+    You can chose the feed, how often the feed updates (every 30 minutes by default), and how many items (5 by default) are displayed to your players in it's config.yml
+    Your players can look up the items at any time by using the /news command. 
+
+Possible Future Additions
+
+    New command to force the RSS feed to update
+    Permissions (not sure why you would want that, but why not. 
+
+Change Log
+
+    V1.0.0: Initial release, what you see is what you get. 
+
+Command
+
+/news - This displays the items from the RSS feed that were downloaded by the last update (this does not force an update).
