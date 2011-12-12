@@ -6,7 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +18,7 @@ public class RssMotd extends JavaPlugin{
 	FileConfiguration config = null;
 	Server server = null;
 	PluginManager pm = null;
+	private RssMotdParserRunnable runnable;
 	@Override
 	public void onDisable() {
 		//goodbye
@@ -32,14 +35,27 @@ public class RssMotd extends JavaPlugin{
 		parseRSS();
 		server.getLogger().info("[NEWS] RSS reader running");
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if(commandLabel.equalsIgnoreCase("news")){
-			ArrayList<String> list = RssMotdParserRunnable.titles;
-			sender.sendMessage(config.getString("info"));
-			for(String s : list){
-				sender.sendMessage("[NEWS] " + s);
+			if(args.length == 0){
+				ArrayList<String> list = RssMotdParserRunnable.titles;
+				sender.sendMessage(config.getString("info"));
+				for(String s : list){
+					sender.sendMessage(config.getString("prefix")+ " " + s);
+				}
+			}else if(args[0].equalsIgnoreCase("update")){
+				if(sender instanceof Player){
+					Player player = (Player)sender;
+					if(player.hasPermission("news.update")){
+						runnable.run();
+					}else{
+						player.sendMessage("you do not have permission to do that");
+					}
+				}else if(sender instanceof ConsoleCommandSender){
+					runnable.run();
+				}
 			}
 		}
 		return true;
@@ -60,7 +76,7 @@ public class RssMotd extends JavaPlugin{
 	private void parseRSS(){
 		//roughly 1200 ticks per second
 		long updateInterval = config.getInt("RefreshTime")*1200;
-		RssMotdParserRunnable runnable = new RssMotdParserRunnable(config.getString("Feed"), config.getInt("Posts"));
+		runnable = new RssMotdParserRunnable(config.getString("Feed"), config.getInt("Posts"));
 		server.getScheduler().scheduleAsyncRepeatingTask(this, runnable, 0, updateInterval);
 	}
 }
