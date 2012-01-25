@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,7 +30,7 @@ public class RssMotd extends JavaPlugin{
 		pm = server.getPluginManager();
 		initConfig();
 		pl = new RssMotdPlayerListener(config);
-		pm.registerEvent(Event.Type.PLAYER_JOIN, pl, Event.Priority.Monitor, this);
+		pm.registerEvents(pl, this);
 		parseRSS();
 		server.getLogger().info("[NEWS] RSS reader running");
 	}

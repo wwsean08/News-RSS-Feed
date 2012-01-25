@@ -4,16 +4,18 @@ import java.util.ArrayList;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
 
-public class RssMotdPlayerListener extends PlayerListener{
+public class RssMotdPlayerListener implements Listener{
 	FileConfiguration config;
 	public RssMotdPlayerListener(FileConfiguration file){
 		config = file;
 	}
 
-	@Override
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
 		ArrayList<String> titles = RssMotdParserRunnable.titles;
